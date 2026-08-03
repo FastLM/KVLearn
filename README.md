@@ -7,9 +7,11 @@ This repository implements the control-plane from the paper
 
 | Component | Role |
 |-----------|------|
-| **PRP** | Prefix Reuse Predictor — 2-layer MLP (577 params) over 16 structural / temporal / pool-state features |
-| **CARS** | Cost-Aware Retention Score — `P̂·(R−T) − U` with hardware-grounded costs |
-| **ATC** | Adaptive Threshold Controller — PI loop on pool pressure + hit-rate bias |
+| **PRP** | Prefix Reuse Predictor — \(\hat{P}(b)=f_\theta(x(b))\in[0,1]\), updated online from delayed reuse labels |
+| **CARS** | Cost-Aware Retention Score — \(\mathrm{CARS}(b)=\hat{P}(b)\cdot(R(b)-T(b))-U(b,\Delta t)\) |
+| **ATC** | Adaptive Threshold 
+Controller — PI loop on pool 
+pressure + hit-rate bias |
 
 Admission and eviction run in the KV-pool coordinator path.
 
