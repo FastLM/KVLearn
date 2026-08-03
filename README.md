@@ -7,9 +7,9 @@ This repository implements the control-plane from the paper
 
 | Component | Role |
 |-----------|------|
-| **PRP** | Prefix Reuse Predictor — \(\hat{P}(b)=f_\theta(x(b))\in[0,1]\), updated online from delayed reuse labels |
-| **CARS** | Cost-Aware Retention Score — \(\mathrm{CARS}(b)=\hat{P}(b)\cdot(R(b)-T(b))-U(b,\Delta t)\) |
-| **ATC** | Adaptive Threshold Controller — adapts \(\theta\) from pool pressure and hit rate |
+| **PRP** | Prefix Reuse Predictor — `P̂(b) = f_θ(x(b)) ∈ [0,1]`, updated online from delayed reuse labels |
+| **CARS** | Cost-Aware Retention Score — `CARS(b) = P̂(b)·(R(b)−T(b)) − U(b,Δt)` |
+| **ATC** | Adaptive Threshold Controller — adapts `θ` from pool pressure and hit rate |
 
 Admission and eviction run in the KV-pool coordinator path.
 
