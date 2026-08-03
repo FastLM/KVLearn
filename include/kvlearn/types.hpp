@@ -33,7 +33,7 @@ inline const char* modality_name(Modality m) {
 }
 
 // ---------------------------------------------------------------------------
-// Model / hardware configuration (Eq. 1, Appendix D)
+// Model / hardware configuration
 // ---------------------------------------------------------------------------
 struct ModelConfig {
   int layers = 32;           // ℓ
@@ -48,7 +48,7 @@ struct FabricConfig {
 };
 
 struct CostCalib {
-  // Piecewise recompute fit (Eq. 8). Defaults follow paper A100 + LLaMA-3-8B
+  // Piecewise recompute fit. Defaults follow A100 + LLaMA-3-8B
   // magnitudes; runtime uses max(bw, flop) so the curve is monotone and R>T
   // on 200 Gbps for typical prefix lengths (see CostModel::recompute_ms).
   double alpha_bw = 0.026;          // ms / token
@@ -116,7 +116,7 @@ struct KVBlock {
 };
 
 // ---------------------------------------------------------------------------
-// Request routed through the disaggregated cluster (Appendix C)
+// Request routed through the disaggregated cluster
 // ---------------------------------------------------------------------------
 struct Request {
   uint64_t req_id = 0;
@@ -163,7 +163,7 @@ struct PoolStats {
 };
 
 inline Bytes kv_footprint(const ModelConfig& m, int L) {
-  // Eq. (1)/(9): |b| = 2 * ℓ * h_kv * d_h * L * δ
+  // |b| = 2 * ℓ * h_kv * d_h * L * δ
   return static_cast<Bytes>(2LL * m.layers * m.kv_heads * m.head_dim * L *
                             m.bytes_per_elem);
 }

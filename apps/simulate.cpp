@@ -255,25 +255,25 @@ int main(int argc, char** argv) {
     std::cout << "\n";
   }
 
-  // Cost-model sanity: Prop. 1 — P* decreases with L for q>1
+  // Cost-model sanity: P* decreases with L for super-linear prefill (q>1)
   CostModel cost(cfg.model, cfg.fabric, cfg.calib, cfg.pool);
   cost.set_delta_t_est(300.0);
-  std::cout << "\nProp.1 check (P*_H vs prefix length, Δt=30s, pool=256GiB):\n";
-  // Use paper-scale pool for the analytic check (not the sim pool size).
-  PoolConfig paper_pool;
-  paper_pool.capacity = 256LL * 1024 * 1024 * 1024;
-  CostModel paper_cost(cfg.model, cfg.fabric, cfg.calib, paper_pool);
-  paper_cost.set_delta_t_est(30.0);
-  paper_cost.set_avg_recompute_ms(20.0);
-  paper_cost.set_arrival_rate(10.0);
-  paper_cost.set_storage_pressure(1.0);
+  std::cout << "\nP*_H vs prefix length (Δt=30s, pool=256GiB):\n";
+  // Use a large reference pool for the analytic check (not the sim pool size).
+  PoolConfig ref_pool;
+  ref_pool.capacity = 256LL * 1024 * 1024 * 1024;
+  CostModel ref_cost(cfg.model, cfg.fabric, cfg.calib, ref_pool);
+  ref_cost.set_delta_t_est(30.0);
+  ref_cost.set_avg_recompute_ms(20.0);
+  ref_cost.set_arrival_rate(10.0);
+  ref_cost.set_storage_pressure(1.0);
   for (int L : {128, 512, 1024, 2048, 4096}) {
     Bytes fp = kv_footprint(cfg.model, L);
-    double pstar = paper_cost.optimal_threshold(L, fp, 30.0);
+    double pstar = ref_cost.optimal_threshold(L, fp, 30.0);
     std::cout << "  L=" << std::setw(5) << L
               << "  R=" << std::setw(8) << std::setprecision(2)
-              << paper_cost.recompute_ms(L) << " ms"
-              << "  T=" << std::setw(8) << paper_cost.transfer_ms(fp) << " ms"
+              << ref_cost.recompute_ms(L) << " ms"
+              << "  T=" << std::setw(8) << ref_cost.transfer_ms(fp) << " ms"
               << "  P*=" << std::setprecision(4) << pstar << "\n";
   }
   return 0;

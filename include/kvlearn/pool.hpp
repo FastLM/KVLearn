@@ -9,7 +9,7 @@
 
 namespace kvlearn {
 
-// Global KV pool directory with CARS min-heap eviction order (§4.3).
+// Global KV pool directory with CARS min-heap eviction order.
 class KVPool {
  public:
   explicit KVPool(PoolConfig cfg);
@@ -27,7 +27,7 @@ class KVPool {
   // Remove and return block; emits nothing (caller handles PRP labels).
   std::optional<KVBlock> erase(BlockId id);
 
-  // Evict lowest-CARS blocks until `need` bytes freed (Alg. 2 skeleton).
+  // Evict lowest-CARS blocks until `need` bytes freed.
   // `refresh` is called before comparing a candidate (lazy score refresh).
   EvictResult evict_bytes(
       Bytes need,

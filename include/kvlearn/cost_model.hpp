@@ -4,7 +4,8 @@
 
 namespace kvlearn {
 
-// Hardware-grounded cost parameters for CARS (Eqs. 2, 4, 8–10).
+// Hardware-grounded cost parameters for CARS:
+// R(b), T(b)=|b|/β, U(b,Δt)=γ·|b|·Δt, CARS=P̂·(R−T)−U.
 class CostModel {
  public:
   CostModel(ModelConfig model, FabricConfig fabric, CostCalib calib,
@@ -16,10 +17,10 @@ class CostModel {
   // Multiply U by pool pressure in [0,1]; empty pool → near-zero opportunity cost.
   void set_storage_pressure(double p);
 
-  // R(b) in milliseconds (Eq. 8)
+  // R(b) in milliseconds (piecewise bw / flop fit)
   double recompute_ms(int prefix_len) const;
 
-  // T(b) in milliseconds (Eq. 2): |b| / β
+  // T(b) in milliseconds: |b| / β
   double transfer_ms(Bytes footprint) const;
 
   // U(b, Δt) in millisecond-equivalent opportunity cost
@@ -29,7 +30,7 @@ class CostModel {
   // Net benefit per hit: R(b) − T(b)  (may be ≤ 0 on slow fabric)
   double net_benefit_ms(int prefix_len, Bytes footprint) const;
 
-  // Optimal admission threshold P*_H(b) from Eq. (5)
+  // Break-even reuse threshold: P*_H(b) = U / (R − T)
   double optimal_threshold(int prefix_len, Bytes footprint,
                            double delta_t_sec) const;
 

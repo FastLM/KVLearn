@@ -4,7 +4,7 @@
 
 namespace kvlearn {
 
-// Adaptive Threshold Controller (§4.4, Eq. 11):
+// Adaptive Threshold Controller:
 //   e(t) = ρ_pool(t) − ρ*
 //   θ(t+1) = θ(t) + Kp·e(t) + Ki·Σ e(j)
 // plus hit-rate secondary bias Δθ_hr.

@@ -11,7 +11,7 @@ This repository implements the control-plane from the paper
 | **CARS** | Cost-Aware Retention Score — `P̂·(R−T) − U` with hardware-grounded costs |
 | **ATC** | Adaptive Threshold Controller — PI loop on pool pressure + hit-rate bias |
 
-Admission (Alg. 1) and eviction (Alg. 2) run in the KV-pool coordinator path.
+Admission and eviction run in the KV-pool coordinator path.
 
 ## Build
 
@@ -43,7 +43,7 @@ Example:
 include/kvlearn/   public headers (types, cost model, PRP, CARS, ATC, pool, control plane)
 src/               implementations
 apps/simulate.cpp  Zipf multimodal trace vs No-Cache / LRU-Pool / KVLearn
-tests/             unit checks (Prop. 1, PRP learning, heap eviction, …)
+tests/             unit checks (threshold scaling, PRP learning, heap eviction, …)
 ```
 
 ## Cost model
@@ -58,7 +58,7 @@ CARS  = P̂(b)·(R−T) − U
 KEEP  ⇔  CARS > θ       (θ from ATC)
 ```
 
-Proposition 1: for super-linear prefill (`q>1`), the optimal reuse threshold `P*_H` **decreases** with prefix length — longer visual blocks admit at lower predicted reuse.
+For super-linear prefill (`q>1`), the optimal reuse threshold `P*_H` **decreases** with prefix length — longer visual blocks admit at lower predicted reuse.
 
 ## Integrating into a serving stack
 

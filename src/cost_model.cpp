@@ -32,7 +32,7 @@ double CostModel::recompute_ms(int prefix_len) const {
   const double L = static_cast<double>(std::max(prefix_len, 1));
   const double r_bw = calib_.alpha_bw * L;
   const double r_flop = calib_.alpha_flop * L * L;
-  // Monotone envelope of the two regimes in Eq. (8).
+  // Monotone envelope of the bandwidth-bound and compute-bound regimes.
   (void)calib_.crossover_tokens;
   return std::max(r_bw, r_flop);
 }

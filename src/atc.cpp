@@ -14,7 +14,7 @@ double AdaptiveThresholdController::clamp(double t) const {
 }
 
 double AdaptiveThresholdController::update(double pool_util, double hit_rate) {
-  // Primary PI on pool pressure (Eq. 11)
+  // Primary PI on pool pressure
   const double e = pool_util - rho_star_;
   integral_ += e;
   // Anti-windup: freeze integral when saturated against error sign

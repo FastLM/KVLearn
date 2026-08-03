@@ -24,7 +24,7 @@ struct SystemConfig {
   FeatureWhitenConfig whiten;
 };
 
-// KVLearn control plane (§4): intercepts block-arrive & pool-full events.
+// KVLearn control plane: intercepts block-arrive & pool-full events.
 class KVLearn {
  public:
   explicit KVLearn(SystemConfig cfg);

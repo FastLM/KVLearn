@@ -27,7 +27,7 @@ static void test_footprint() {
 static void test_cost_prop1() {
   SystemConfig cfg;
   cfg.fabric.bandwidth_bps = 25e9;
-  // Force super-linear regime for the lengths under test (Prop. 1, q>1).
+  // Force super-linear regime for the lengths under test (q>1).
   cfg.calib.alpha_bw = 1e-6;
   cfg.calib.alpha_flop = 8e-6;
   CostModel cost(cfg.model, cfg.fabric, cfg.calib, cfg.pool);

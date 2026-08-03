@@ -120,7 +120,7 @@ AdmitResult KVLearn::admit(const Request& req, BlockId new_id) {
 
   const bool pass = b.cars > atc_.theta();
 
-  // Exploration: occasionally admit rejected blocks for label bootstrap (§4.2)
+  // Exploration: occasionally admit rejected blocks for label bootstrap
   static thread_local std::mt19937 rng{123};
   std::uniform_real_distribution<double> u(0.0, 1.0);
   const bool explore = !pass && (u(rng) < explore_rate_);
@@ -145,7 +145,7 @@ AdmitResult KVLearn::admit(const Request& req, BlockId new_id) {
     });
     res.freed = freed.freed;
     for (auto& victim : freed.evicted_blocks) {
-      // Alg. 2: emit y=0 if never reused before eviction; y=1 if it had hits.
+      // Emit y=0 if never reused before eviction; y=1 if it had hits.
       const double y = (victim.hit_count > 1) ? 1.0 : 0.0;
       register_label(victim, y);
       radix_.clear_block(victim.prefix_key);
@@ -191,8 +191,7 @@ EvictResult KVLearn::evict(Bytes need) {
   });
 
   for (auto& victim : result.evicted_blocks) {
-    // Alg. 2 line 7: y=0 for eviction without reuse signal preference;
-    // if the block was hit, still a useful (positive) training signal.
+    // y=0 if evicted without reuse; y=1 if the block was hit.
     const double y = (victim.hit_count > 1) ? 1.0 : 0.0;
     register_label(victim, y);
     radix_.clear_block(victim.prefix_key);

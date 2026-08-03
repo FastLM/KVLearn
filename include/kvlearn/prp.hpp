@@ -8,7 +8,7 @@
 
 namespace kvlearn {
 
-// Two-layer MLP reuse predictor (§4.2, Eq. 6–7).
+// Two-layer MLP reuse predictor.
 // P̂(b) = σ(w₂ᵀ ReLU(W₁ x(b) + b₁) + b₂)
 // Params: 32×16 + 32 + 32 + 1 = 577 scalars.
 class PrefixReusePredictor {

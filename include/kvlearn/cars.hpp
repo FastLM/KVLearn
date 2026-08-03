@@ -5,7 +5,7 @@
 
 namespace kvlearn {
 
-// Cost-Aware Retention Score (§4.3, Eq. 10):
+// Cost-Aware Retention Score:
 //   CARS(b) = P̂(b) · [R(b) − T(b)] − U(b, Δt_est)
 class CarsScorer {
  public:
