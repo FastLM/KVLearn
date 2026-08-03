@@ -76,6 +76,22 @@ Tensor movement (RDMA / NCCL) stays in your data plane; this library only decide
 - A100 + LLaMA-3-8B calib: `α_bw≈0.026 ms/tok`, `α_flop≈8e−6 ms/tok²`, `L×=512`
 - Fabric default: InfiniBand HDR 200 Gbps (`β=25 GB/s`)
 
+## Citation
+
+If you use this code of KVLearn, please cite:
+
+```bibtex
+@inproceedings{liu2026kvlearn,
+  author    = {Dong Liu and Yanxuan Yu and Eric Jiang and Shu Wang and Ying Nian Wu},
+  title     = {To Keep or Not to Keep: Learning KV Cache Retention in Disaggregated LLM Serving Systems},
+  booktitle = {Proceedings of the 19th ACM International Systems and Storage Conference (SYSTOR '26)},
+  series     = {SYSTOR '26},
+  year       = {2026},
+  publisher  = {Association for Computing Machinery},
+  address    = {New York, NY, USA}
+}
+```
+
 ## License
 
 MIT
