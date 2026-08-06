@@ -1,9 +1,4 @@
-# KVLearn
-
-Learning-based KV cache **retention** for disaggregated LLM serving.
-
-This repository implements the control-plane from the paper
-*To Keep or Not to Keep: Learning KV Cache Retention in Disaggregated LLM Serving Systems*:
+# KVLearn: Learning KV Cache Retention in Disaggregated LLM Serving Systems
 
 | Component | Role |
 |-----------|------|
