@@ -79,11 +79,17 @@ If you use this code of KVLearn, please cite:
 @inproceedings{liu2026kvlearn,
   author    = {Dong Liu and Yanxuan Yu and Eric Jiang and Shu Wang and Ying Nian Wu},
   title     = {To Keep or Not to Keep: Learning KV Cache Retention in Disaggregated LLM Serving Systems},
-  booktitle = {Proceedings of the 19th ACM International Systems and Storage Conference (SYSTOR '26)},
-  series     = {SYSTOR '26},
-  year       = {2026},
-  publisher  = {Association for Computing Machinery},
-  address    = {New York, NY, USA}
+  booktitle = {The 19th ACM International Systems and Storage Conference (SYSTOR '26)},
+  series    = {SYSTOR '26},
+  year      = {2026},
+  month     = {sep},
+  location  = {Virtual Event, Israel},
+  publisher = {Association for Computing Machinery},
+  address   = {New York, NY, USA},
+  isbn      = {979-8-4007-2473-2/26/09},
+  doi       = {10.1145/3793230.3837769},
+  url       = {https://doi.org/10.1145/3793230.3837769},
+  copyright = {Creative Commons Attribution 4.0 International}
 }
 ```
 
