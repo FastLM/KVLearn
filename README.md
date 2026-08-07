@@ -10,7 +10,7 @@ Admission and eviction run in the KV-pool coordinator path.
 
 ## Build
 
-**Make (no CMake required):**
+**Make:**
 
 ```bash
 make -j
@@ -18,7 +18,7 @@ make test
 ./build/kvlearn_sim [n_requests] [zipf_alpha] [pool_GiB]
 ```
 
-**CMake (optional):**
+**CMake:**
 
 ```bash
 cmake -S . -B build -DCMAKE_BUILD_TYPE=Release
