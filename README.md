@@ -76,20 +76,22 @@ Tensor movement (RDMA / NCCL) stays in your data plane; this library only decide
 If you use this code of KVLearn, please cite:
 
 ```bibtex
-@inproceedings{liu2026kvlearn,
-  author    = {Dong Liu and Yanxuan Yu and Eric Jiang and Shu Wang and Ying Nian Wu},
-  title     = {To Keep or Not to Keep: Learning KV Cache Retention in Disaggregated LLM Serving Systems},
-  booktitle = {The 19th ACM International Systems and Storage Conference (SYSTOR '26)},
-  series    = {SYSTOR '26},
-  year      = {2026},
-  month     = {sep},
-  location  = {Virtual Event, Israel},
-  publisher = {Association for Computing Machinery},
-  address   = {New York, NY, USA},
-  isbn      = {979-8-4007-2473-2/26/09},
-  doi       = {10.1145/3793230.3837769},
-  url       = {https://doi.org/10.1145/3793230.3837769},
-  copyright = {Creative Commons Attribution 4.0 International}
+@inproceedings{10.1145/3793230.3837769,
+author = {Liu, Dong and Yu, Yanxuan and Jiang, Eric and Wang, Shu and Wu, Ying Nian},
+title = {To Keep or Not to Keep: Learning KV Cache Retention in Disaggregated LLM Serving Systems},
+year = {2026},
+isbn = {9798400724732},
+publisher = {Association for Computing Machinery},
+address = {New York, NY, USA},
+url = {https://doi.org/10.1145/3793230.3837769},
+doi = {10.1145/3793230.3837769},
+abstract = {Disaggregated LLM serving separates prefill and decode into distinct node pools, interposing a network fabric between the moment a key-value (KV) cache is computed and the moment it is consumed. This architectural shift invalidates a core assumption of classical cache policies: that the cost of a miss is simply recomputation on the same device. In disaggregated systems, a miss triggers both recomputation on a prefill node and a network transfer of the resulting KV block to the decode node—costs that differ by an order of magnitude and depend on prefix length, model width, and fabric bandwidth. Meanwhile, admitting a block to the global KV pool requires an additional transfer at compute time, so a poorly chosen keep decision wastes both memory and bandwidth even before reuse occurs.We present KVLearn, a learning-based retention framework that makes keep/evict decisions as first-class cost-optimization choices in disaggregated LLM serving. KVLearn consists of three components: (i) a lightweight Prefix Reuse Predictor (PRP) that estimates reuse probability from structural and temporal prefix features without touching model weights; (ii) a Cost-Aware Retention Score (CARS) that translates reuse probability into a keep/admit signal by accounting for per-block recompute, transfer, and storage costs; and (iii) an Adaptive Threshold Controller (ATC) that adjusts the admission threshold online using closed-loop feedback from observed hit rates and memory pressure. We integrate KVLearn into a globally disaggregated serving topology and evaluate it on both text and multimodal workloads, where image/video-derived tokens create large, expensive-to-recompute KV blocks under heterogeneous reuse distributions. KVLearn reduces end-to-end time-to-first-token (TTFT) by up to 56\% vs. No-Cache (recompute-only), up to 38\% vs. LRU-Pool, and up to 33\% vs. Mooncake-style disaggregated baselines. Inter-node KV transfer volume is cut by up to 53\% vs. LRU-Pool. On MM-Session, throughput stays within ~5\% of oracle. Our code implementation of KVLearn is available at https://github.com/FastLM/KVLearn.},
+booktitle = {Proceedings of the 19th ACM International Systems and Storage Conference},
+pages = {52–65},
+numpages = {14},
+keywords = {KV cache, disaggregated LLM serving, cache admission, online learning, efficient inference, memory hierarchy, prefix reuse},
+location = {Virtual Event, Virtual Event, Israel},
+series = {SYSTOR '26}
 }
 ```
 
